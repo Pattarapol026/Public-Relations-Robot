@@ -1,0 +1,186 @@
+"""Broad questions a visitor asks when they walk up to the robot at the invention contest: "what is this place about",
+"what is there to see", "where do I find the robots", "when should I come". Added 11 Nov 2026 after "ที่นี่เป็นสถานที่
+เกี่ยวกับอะไร" was answered "no information".
+
+Every fact comes from entries already in the knowledge base (rules of the contest, the schedule and map pictures of
+10 Nov 2026, the concept-paper count of provincial group 5). Nothing new is claimed: what the sources do not say
+(entry fee, who may visit, parking rules) is left to the "no information" answer, which lists the question for the Admin.
+Answers are written to be spoken: short, Arabic digits.
+"""
+from __future__ import annotations
+
+Entry = tuple[str, str, str, str, bool, str, str]
+
+OVERVIEW = "ภาพรวมงาน"
+WHATS_ON = "มีอะไรให้ชมในงาน"
+
+PLACE_KEYS = (
+    "ที่นี่เกี่ยวกับอะไร,ที่นี่เป็นสถานที่เกี่ยวกับอะไร,สถานที่เกี่ยวกับอะไร,สถานที่นี้เกี่ยวกับ,สถานที่นี้คือ,สถานที่แห่งนี้,"
+    "ที่นี่ทำอะไร,ที่นี่มีอะไร,ที่นี่คืออะไร,ที่นี่เป็นที่อะไร,ที่นี่ทำอะไรกัน,ที่นี่ทำอะไรกันอยู่,มาทำอะไรกัน,งานนี้เกี่ยวกับอะไร,การประกวดนี้เกี่ยวกับอะไร,การแข่งขันนี้เกี่ยวกับอะไร,งานประกวดนี้เกี่ยวกับอะไร,"
+    "what is this place,what is this place about,what is this about,what happens here,what is here"
+)
+
+THAI_NUMBER = {1: "หนึ่ง", 2: "สอง", 3: "สาม", 4: "สี่", 5: "ห้า", 6: "หก", 7: "เจ็ด"}
+PLACE_OF = {n: ("หอประชุม T-VET" if n in (4, 5) else "ลานอเนกประสงค์หลังอาคาร 9") for n in range(1, 8)}
+PLACE_OF_EN = {n: ("the T-VET hall" if n in (4, 5) else "the open lawn behind building 9") for n in range(1, 8)}
+CATEGORY_TEXT = {
+    1: "ประเภทที่ 1 คือสิ่งประดิษฐ์ด้านการเกษตรหรืออุตสาหกรรม เป็นเครื่องมือหรือเครื่องจักรที่ใช้งานได้จริงอย่างมีประสิทธิภาพ",
+    2: "ประเภทที่ 2 คือสิ่งประดิษฐ์ด้านปัญญาประดิษฐ์สมองกลฝังตัวอัจฉริยะ พัฒนาทั้งซอฟต์แวร์และฮาร์ดแวร์ ใช้ AI ช่วยคิดวิเคราะห์และประมวลผล",
+    3: "ประเภทที่ 3 คือสิ่งประดิษฐ์ด้านพลังงานและสิ่งแวดล้อม เช่น อนุรักษ์พลังงาน พลังงานทดแทน และยานยนต์ไฟฟ้า",
+    4: "ประเภทที่ 4 คือสิ่งประดิษฐ์ด้านอาหาร เป็นผลิตภัณฑ์อาหารพร้อมบรรจุภัณฑ์ที่ปลอดภัยและมีคุณค่าทางโภชนาการ",
+    5: "ประเภทที่ 5 คือสิ่งประดิษฐ์เพื่อสุขภาพ หรือ Health Care ช่วยส่งเสริม ป้องกัน รักษา หรือฟื้นฟูสุขภาพ",
+    6: "ประเภทที่ 6 คือสิ่งประดิษฐ์ด้านผลิตภัณฑ์เชิงพาณิชย์ เป็นผลิตภัณฑ์และบรรจุภัณฑ์ที่ไม่ใช่อาหาร พร้อมใช้งานและตรงกับความต้องการของตลาด",
+    7: "ประเภทที่ 7 คือสิ่งประดิษฐ์ด้านหุ่นยนต์ประชาสัมพันธ์อัจฉริยะ เป็นหุ่นยนต์ที่เคลื่อนที่และโต้ตอบกับผู้ใช้อย่างชาญฉลาด ใช้ฮาร์ดแวร์ ซอฟต์แวร์ และ AI ช่วยเผยแพร่ข้อมูล",
+}
+CATEGORY_TEXT_EN = {
+    1: "Category 1 is agriculture or industry: machines and tools that really work well.",
+    2: "Category 2 is AI and smart embedded systems: software and hardware that use AI to analyse and process.",
+    3: "Category 3 is energy and environment: saving energy, renewable energy and electric vehicles.",
+    4: "Category 4 is food: safe, nutritious food products with their packaging.",
+    5: "Category 5 is health care: things that promote, prevent, treat or restore health.",
+    6: "Category 6 is commercial products: ready-to-use products and packaging that are not food.",
+    7: "Category 7 is smart public-relations robots: robots that move and interact intelligently, using hardware, software and AI to spread information.",
+}
+
+
+def general_entries() -> list[Entry]:
+    entries: list[Entry] = []
+
+    def add(category: str, question: str, answer: str, keywords: str, question_en: str, answer_en: str,
+            shortcut: bool = False) -> None:
+        entries.append((category, question, answer, keywords, shortcut, question_en, answer_en))
+
+    add(OVERVIEW, "ที่นี่เป็นสถานที่เกี่ยวกับอะไร",
+        "ที่นี่คือวิทยาลัยเทคนิคสมุทรปราการ กำลังจัดการประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่ ระดับกลุ่มจังหวัด กลุ่มที่ 5 "
+        "คือชลบุรีและสมุทรปราการ วันที่ 11 ถึง 12 พฤศจิกายน 2569 ครับ นักเรียนนักศึกษาอาชีวศึกษานำผลงานสิ่งประดิษฐ์ 7 ประเภท "
+        "มาแสดงและประกวดกัน ถามผมเรื่องประเภทผลงาน กำหนดการ หรือจุดต่าง ๆ ในงานได้เลยครับ",
+        PLACE_KEYS,
+        "What is this place about?",
+        "This is Samut Prakan Technical College, hosting the Young Generation Invention Contest for provincial group 5, "
+        "Chonburi and Samut Prakan, on 11 and 12 November 2026. Vocational students show and compete with inventions in "
+        "7 categories. Ask me about the categories, the schedule or the places in the event.", True)
+    add(OVERVIEW, "ชื่อการประกวดนี้คืออะไร",
+        "การประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่ ระดับกลุ่มจังหวัด กลุ่มที่ 5 จังหวัดชลบุรีและสมุทรปราการ "
+        "ประจำปีการศึกษา 2569 จัดวันที่ 11 ถึง 12 พฤศจิกายน 2569 ครับ",
+        "ชื่องาน,ชื่อการประกวด,ชื่อการแข่งขัน,งานนี้ชื่ออะไร,การประกวดนี้ชื่อ,ชื่อโครงการ,name of the contest,name of the event",
+        "What is the contest called?",
+        "The Young Generation Invention Contest, provincial group 5 (Chonburi and Samut Prakan), academic year 2026, "
+        "held on 11 and 12 November 2026.")
+    add(OVERVIEW, "กลุ่มจังหวัดที่ 5 คือจังหวัดอะไรบ้าง",
+        "กลุ่มจังหวัดที่ 5 มี 2 จังหวัดครับ คือชลบุรีและสมุทรปราการ ผลงานของทั้งสองจังหวัดมาแสดงและประกวดที่นี่",
+        "กลุ่มจังหวัดที่ 5,กลุ่ม 5,กลุ่มที่ 5 คืออะไร,กลุ่มที่ 5 มีจังหวัดไหน,provincial group 5,group 5",
+        "Which provinces are in group 5?",
+        "Two provinces: Chonburi and Samut Prakan. Entries from both are shown and judged here.")
+    add(WHATS_ON, "ในงานนี้มีอะไรให้ชมบ้าง",
+        "มีผลงานสิ่งประดิษฐ์ของนักเรียนนักศึกษาอาชีวศึกษา 7 ประเภทครับ ประเภทที่ 1 2 3 6 และ 7 แสดงที่ลานอเนกประสงค์หลังอาคาร 9 "
+        "ส่วนประเภทที่ 4 และ 5 แสดงที่หอประชุม T-VET วันที่ 12 พฤศจิกายนยังมีพิธีเปิด การนำเสนอผลงาน "
+        "และการประกาศผลตอนเย็นด้วยครับ",
+        "มีอะไรให้ดู,มีอะไรให้ชม,ดูอะไรได้,ชมอะไรได้,มีอะไรน่าสนใจ,ในงานมีอะไร,ในงานนี้มีอะไร,งานนี้มีอะไร,ไปดูอะไรดี,"
+        "ควรดูอะไร,ในงานนี้มีอะไรบ้าง,what is there to see,what can i see,what's in the event,highlights",
+        "What is there to see at this event?",
+        "Student inventions in 7 categories. Categories 1, 2, 3, 6 and 7 are on the open lawn behind building 9, and "
+        "categories 4 and 5 in the T-VET hall. On 12 November there is also the opening ceremony, the presentations and "
+        "the results in the evening.", True)
+    add(WHATS_ON, "ผลงานแต่ละประเภทแสดงที่ไหนบ้าง",
+        "ประเภทที่ 1 เกษตรหรืออุตสาหกรรม 2 ปัญญาประดิษฐ์ 3 พลังงานและสิ่งแวดล้อม 6 ผลิตภัณฑ์เชิงพาณิชย์ และ 7 หุ่นยนต์ประชาสัมพันธ์ "
+        "แสดงที่ลานอเนกประสงค์หลังอาคาร 9 ส่วนประเภทที่ 4 อาหาร และ 5 เพื่อสุขภาพ แสดงที่หอประชุม T-VET ครับ",
+        "ผลงานอยู่ที่ไหน,บูธอยู่ตรงไหน,ผลงานแสดงที่ไหน,ดูผลงานได้ที่ไหน,แต่ละประเภทอยู่ที่ไหน,นิทรรศการอยู่ที่ไหน,ไปดูผลงานที่ไหน,"
+        "where are the inventions,where are the exhibits,where are the booths",
+        "Where is each category shown?",
+        "Categories 1 agriculture or industry, 2 AI, 3 energy and environment, 6 commercial products and 7 robots are on the "
+        "open lawn behind building 9. Categories 4 food and 5 health care are in the T-VET hall.")
+    add(WHATS_ON, "อยากดูหุ่นยนต์ต้องไปที่ไหน",
+        "หุ่นยนต์ประชาสัมพันธ์อัจฉริยะเป็นผลงานประเภทที่ 7 ครับ แสดงที่ลานอเนกประสงค์หลังอาคาร 9 วันที่ 12 พฤศจิกายน "
+        "ผู้เข้าประกวดนำเสนอผลงานช่วง 09.30 ถึง 12.00 น. และ 13.00 ถึง 15.00 น.",
+        "อยากดูหุ่นยนต์,หุ่นยนต์อยู่ที่ไหน,หุ่นยนต์อยู่ตรงไหน,หุ่นยนต์ไปทางไหน,มีหุ่นยนต์ไหม,หุ่นยนต์ตัวอื่น,ดูหุ่นยนต์,robots,where are the robots,any robots",
+        "Where can I see the robots?",
+        "Smart public-relations robots are category 7, on the open lawn behind building 9. On 12 November the entrants "
+        "present from 09:30 to 12:00 and 13:00 to 15:00.")
+    add(WHATS_ON, "อยากดูผลงานอาหารหรือสุขภาพต้องไปที่ไหน",
+        "ผลงานด้านอาหาร ประเภทที่ 4 และด้านเพื่อสุขภาพ ประเภทที่ 5 แสดงที่หอประชุม T-VET ครับ เป็นจุดที่ 4 ในแผนผัง",
+        "ดูผลงานอาหาร,ผลงานสุขภาพ,ผลงานอาหารอยู่ที่ไหน,ผลงานสุขภาพอยู่ที่ไหน,อาหารและสุขภาพ,food and health,food exhibits",
+        "Where can I see the food or health inventions?",
+        "Food, category 4, and health care, category 5, are in the T-VET hall, point 4 on the plan.")
+    add(WHATS_ON, "สิ่งประดิษฐ์ในงานนี้มีตัวอย่างอะไรบ้าง",
+        "มีหลายด้านครับ เช่น เกษตรและอุตสาหกรรม ปัญญาประดิษฐ์และระบบสมองกลฝังตัว พลังงานทดแทนและสิ่งแวดล้อม "
+        "รวมถึงยานยนต์ไฟฟ้า อาหารและเครื่องดื่ม ผลงานเพื่อสุขภาพ ผลิตภัณฑ์เชิงพาณิชย์ และหุ่นยนต์ประชาสัมพันธ์ ครับ",
+        "ตัวอย่างสิ่งประดิษฐ์,สิ่งประดิษฐ์มีอะไรบ้าง,ผลงานมีอะไรบ้าง,ตัวอย่างผลงาน,สิ่งประดิษฐ์อะไรบ้าง,examples of inventions,what kind of inventions",
+        "What kinds of inventions are here?",
+        "Several fields: agriculture and industry, AI and embedded systems, renewable energy and the environment including "
+        "electric vehicles, food and drink, health care, commercial products, and public-relations robots.")
+    add(WHATS_ON, "งานนี้มีผลงานทั้งหมดกี่ชิ้น",
+        "ตามสรุปแนวคิดเบื้องต้นหรือ Concept Paper ของกลุ่มจังหวัดที่ 5 มี 99 ผลงานครับ เป็นของชลบุรี 68 ผลงาน "
+        "และสมุทรปราการ 31 ผลงาน",
+        "ผลงานทั้งหมดกี่ชิ้น,มีผลงานกี่ชิ้น,ผลงานทั้งหมด,กี่ผลงาน,จำนวนผลงานในงาน,จำนวนผลงานทั้งหมด,how many entries,how many inventions here,total entries",
+        "How many entries are there in all?",
+        "The concept papers of group 5 count 99 entries: 68 from Chonburi and 31 from Samut Prakan.")
+    add(WHATS_ON, "ควรมาชมผลงานช่วงไหน",
+        "วันที่ 12 พฤศจิกายนครับ ผู้เข้าประกวดนำเสนอผลงานและกรรมการตรวจบูธ 09.30 ถึง 12.00 น. และ 13.00 ถึง 15.00 น. "
+        "ส่วนพิธีเปิดเริ่ม 09.00 น. และประกาศผลกับพิธีปิด 16.30 ถึง 17.30 น. ส่วนวันที่ 11 เป็นวันลงทะเบียนและติดตั้งบูธครับ",
+        "มาช่วงไหน,มากี่โมงดี,ควรมาตอนไหน,ชมผลงานช่วงไหน,ไปดูตอนไหน,มาชมผลงานกี่โมง,ควรมาตอนกี่โมง,มาตอนกี่โมง,ควรมากี่โมง,ควรมาวันไหน,best time to visit,when should i come,when to visit",
+        "When is the best time to see the inventions?",
+        "On 12 November: the entrants present and the judges visit the booths from 09:30 to 12:00 and 13:00 to 15:00. The "
+        "opening is at 09:00 and the results and closing are 16:30 to 17:30. 11 November is for registration and booth set-up.",
+        True)
+    add(WHATS_ON, "ในงานมีพิธีหรือกิจกรรมพิเศษอะไรบ้าง",
+        "มีพิธีเปิดวันที่ 12 พฤศจิกายน 09.00 น. ที่อาคาร 9 ชั้น 4 และพิธีปิดพร้อมประกาศผลและมอบเกียรติบัตร 16.30 ถึง 17.30 น. ครับ",
+        "มีพิธีอะไร,กิจกรรมพิเศษ,มีกิจกรรมอะไร,กิจกรรมในงาน,กิจกรรมอื่น,special events,ceremonies,activities",
+        "Are there any ceremonies or special events?",
+        "Yes: the opening ceremony on 12 November at 09:00 on floor 4 of building 9, and the closing ceremony with the "
+        "results and certificates from 16:30 to 17:30.")
+    add(OVERVIEW, "สิ่งประดิษฐ์คืออะไร",
+        "สิ่งประดิษฐ์คือผลงานที่คิดและสร้างขึ้นใหม่หรือพัฒนาให้ดีขึ้น เพื่อแก้ปัญหาหรือเพิ่มประสิทธิภาพ "
+        "ในงานนี้เป็นผลงานของนักเรียนนักศึกษาอาชีวศึกษาครับ",
+        "สิ่งประดิษฐ์คืออะไร,สิ่งประดิษฐ์หมายถึง,นิยามสิ่งประดิษฐ์,นวัตกรรมคืออะไร,what is an invention,invention means",
+        "What is an invention?",
+        "A new thing made, or an existing thing made better, to solve a problem or work more efficiently. Here they are "
+        "the work of vocational students.")
+    add(OVERVIEW, "งานนี้มีประโยชน์อะไร",
+        "งานนี้ส่งเสริมให้นักเรียนนักศึกษาอาชีวศึกษาคิดค้นนวัตกรรม พัฒนาผลงานสู่เชิงพาณิชย์และนำไปใช้ประโยชน์ในชุมชน "
+        "และยกย่องนักประดิษฐ์ที่มีผลงานดีเด่น ผลงานที่ได้คะแนนสูงจะได้ไปประกวดต่อในระดับภาคและระดับชาติครับ",
+        "ประโยชน์ของงาน,งานนี้ดียังไง,จัดไปทำไม,จัดทำไม,ทำไมต้องจัด,งานนี้สำคัญยังไง,เป้าหมายของงาน,benefit of the event,why hold this event",
+        "What is this event good for?",
+        "It encourages vocational students to innovate, take their work to commercial use and community benefit, and "
+        "honours outstanding inventors. High-scoring entries go on to the regional and national rounds.")
+    add(OVERVIEW, "คุณมาทำอะไรที่งานนี้",
+        "ผมคือไอร่า หุ่นยนต์ประชาสัมพันธ์ จากวิทยาลัยเทคนิคสัตหีบครับ มาช่วยตอบคำถามเกี่ยวกับงานประกวดสิ่งประดิษฐ์นี้ "
+        "เช่น กำหนดการ ประเภทผลงาน และจุดต่าง ๆ ในงานครับ",
+        "มาทำอะไร,มาทำอะไรที่นี่,คุณมาทำอะไร,หน้าที่ของคุณ,คุณทำหน้าที่อะไร,why are you here,what are you doing here",
+        "What are you doing at this event?",
+        "I am Aira, a public-relations robot from Sattahip Technical College. I am here to answer questions about this "
+        "invention contest: the schedule, the categories and the places.")
+    add(OVERVIEW, "ที่นี่มีการแข่งขันอะไรบ้าง",
+        "ที่นี่ประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่ 7 ประเภทครับ ประเภทที่ 1 ด้านการเกษตรหรืออุตสาหกรรม 2 ด้านปัญญาประดิษฐ์สมองกลฝังตัวอัจฉริยะ "
+        "3 ด้านพลังงานและสิ่งแวดล้อม 4 ด้านอาหาร 5 ด้านเพื่อสุขภาพ 6 ด้านผลิตภัณฑ์เชิงพาณิชย์ "
+        "และ 7 ด้านหุ่นยนต์ประชาสัมพันธ์อัจฉริยะ",
+        "มีการแข่งขันอะไร,แข่งขันอะไรบ้าง,การแข่งขันอะไรบ้าง,มีแข่งอะไร,แข่งอะไรบ้าง,แข่งอะไร,ประกวดอะไรบ้าง,ประกวดอะไร,มีประกวดอะไร,"
+        "มีการประกวดอะไร,มีการแข่งอะไร,แข่งกันเรื่องอะไร,ประกวดเรื่องอะไร,รายการแข่งขัน,what competitions,what is the competition,what do they compete in,what is being judged",
+        "What competitions are held here?",
+        "A contest for young inventors in 7 categories: 1 agriculture or industry, 2 AI and smart embedded systems, "
+        "3 energy and environment, 4 food, 5 health care, 6 commercial products, and 7 smart public-relations robots.", True)
+    # ------------------------------------------------------------------ "สนใจประเภทที่ N": the category itself, by its number
+    # (the speech model writes the number as a digit or as a word; the service turns words into digits before matching)
+    for number in range(1, 8):
+        base_q = f"ประเภทที่ {number} คืออะไร"
+        base = CATEGORY_TEXT[number]
+        spoken = THAI_NUMBER[number]
+        extra = " และผมเองก็เป็นผลงานประเภทนี้ครับ" if number == 7 else ""
+        extra_en = " And I am an entry in this category myself." if number == 7 else ""
+        add(WHATS_ON, f"สนใจประเภทที่ {number}",
+            base + extra + f" ผลงานประเภทนี้แสดงที่{PLACE_OF[number]}ครับ",
+            f"สนใจประเภทที่ {number},สนใจประเภท {number},สนใจประเภทที่{spoken},สนใจประเภท{spoken},อยากรู้เรื่องประเภทที่ {number},"
+            f"อยากรู้ประเภทที่ {number},ขอรู้เรื่องประเภทที่ {number},เล่าเรื่องประเภทที่ {number},บอกเรื่องประเภทที่ {number},"
+            f"ประเภทที่ {number},ประเภท {number},ประเภทที่{spoken},interested in category {number},category {number}",
+            f"I am interested in category {number}",
+            CATEGORY_TEXT_EN[number] + extra_en + f" The entries are shown at {PLACE_OF_EN[number]}.")
+    add(WHATS_ON, "มีอะไรแนะนำไหม",
+        "ผมแนะนำประเภทที่ 7 หุ่นยนต์ประชาสัมพันธ์อัจฉริยะครับ เป็นประเภทของผมเอง แสดงที่ลานอเนกประสงค์หลังอาคาร 9 "
+        "ถ้าชอบเทคโนโลยี ลองดูประเภทที่ 2 ปัญญาประดิษฐ์สมองกลฝังตัว ส่วนประเภทที่ 4 อาหาร และ 5 เพื่อสุขภาพ อยู่ที่หอประชุม T-VET "
+        "สนใจประเภทไหนบอกผมได้เลยครับ",
+        "แนะนำ,แนะนำสิ่งประดิษฐ์,แนะนำสิ่งประดิษฐ์หน่อย,แนะนำผลงานหน่อย,สิ่งประดิษฐ์ที่น่าสนใจ,สิ่งประดิษฐ์ที่แนะนำ,อยากดูสิ่งประดิษฐ์,ผลงานที่น่าสนใจ,มีอะไรแนะนำ,แนะนำหน่อย,ขอคำแนะนำ,ช่วยแนะนำ,แนะนำผลงาน,ผลงานแนะนำ,ผลงานเด่น,ผลงานไหนเด่น,ผลงานไหนดี,อะไรน่าดู,"
+        "มีอะไรน่าดูไหม,ควรดูอะไรดี,ไปดูอะไรดี,ผลงานไหนน่าสนใจ,อะไรน่าสนใจที่สุด,recommend,recommendation,suggest,what do you recommend",
+        "What do you recommend?",
+        "I recommend category 7, the smart public-relations robots, which is my own category, on the open lawn behind "
+        "building 9. If you like technology, try category 2, AI and embedded systems. Categories 4 food and 5 health care are "
+        "in the T-VET hall. Tell me which one interests you.", True)
+    return entries

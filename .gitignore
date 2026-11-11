@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Runtime data (สร้างอัตโนมัติเมื่อรันโปรแกรม)
+logs/
+data/
+media/
+models/
+
+# IDE
+.vscode/
+.idea/
+.venv*/

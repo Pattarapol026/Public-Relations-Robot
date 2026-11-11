@@ -1,0 +1,270 @@
+/* Admin console: "Magenta Night". Near-black violet content, magenta-to-purple sidebar in the style of the team's reference picture:
+   a near-black violet ground, flat panels with hairline edges, outlined stat cards, and ONE accent,
+   crimson-magenta, used for what is active (primary buttons, bars, sliders, table heads).
+   sheet wins over the application's. The earlier light theme is kept as admin_light.qss.
+   Never set font-family here (see ui/fonts.py): readability comes from size, weight, spacing.
+   url(@styles/...) is replaced with this folder's path when the sheet is loaded.
+
+   Palette (text is at least 4.5:1 on the surface it sits on; text ON the accent is white)
+     ground  #0c0a14   panel #13101d   section #181427   well #0f0c19   line #2a2340   line-strong #4a3d66
+     text    #f4f0fa   secondary #cfc6e0   muted #a99ec2
+     pink    #d6155f (accent)  #ff5c8a (accent text on dark, 7:1)  #ff5c8a (light)  #ff5c8a (deep)
+     ink     #ffffff (text on pink, 7:1)
+     green   #ff5c8a / #12352a   amber #fbbf24 / #3f2e0a   coral #ff7a66 / #4a1a1a   violet #93c5fd / #2d2250 */
+
+QWidget { font-size: 18px; color: #f4f0fa; }
+QDialog, QMessageBox { background: #13101d; }
+QToolTip {
+    color: #f4f0fa; background: #1d1830; border: 1px solid #d6155f;
+    border-radius: 6px; padding: 6px 8px; font-size: 15px;
+}
+
+#adminScreen { background: #0c0a14; }
+QStackedWidget, QScrollArea, QScrollArea > QWidget > QWidget { background: transparent; border: none; }
+
+/* --- panels: flat, with a hairline edge --- */
+QFrame[role="panel"] { background: #13101d; border: 1px solid #231d38; border-radius: 16px; }
+QFrame[role="sidebar"] { background: #0f0c19; border: 1px solid #231d38; border-radius: 16px; }
+QFrame[role="section"] { background: #181427; border: 1px solid #2a2340; border-radius: 14px; }
+QFrame[role="card"] { background: #181427; border: 1px solid #2a2340; border-radius: 14px; padding: 8px; }
+QFrame[role="divider"] { background: #2a2340; border: none; max-height: 1px; min-height: 1px; }
+
+/* stat cards: outlined, like the reference; a short coloured edge says how the part is doing */
+QFrame[role="metric"], QFrame[role="tile"] {
+    background: #13101d; border: 1px solid #6b5a8c; border-left: 4px solid #ff5c8a; border-radius: 10px;
+}
+QFrame[role="metric"][level="safe"] { border-left-color: #4ade80; }
+QFrame[role="metric"][level="wait"] { border-left-color: #fbbf24; }
+QFrame[role="metric"][level="danger"] { border-left-color: #ff7a66; }
+QFrame[role="metric"][level="info"] { border-left-color: #93c5fd; }
+
+/* --- text --- */
+QLabel { background: transparent; }
+QLabel[role="heading"] { font-size: 20px; font-weight: bold; color: #ffffff; }
+QLabel[role="title"] { font-size: 22px; font-weight: bold; color: #ffffff; }
+QLabel[role="page-title"] { font-size: 26px; font-weight: bold; color: #ffffff; }
+QLabel[role="section-title"] { font-size: 20px; font-weight: bold; color: #ffffff; padding: 4px 0 2px 0; }
+QLabel[role="hint"] { font-size: 16px; color: #a99ec2; }
+QLabel[role="hint"][level="error"] { color: #ff9a88; }
+QLabel[role="error"] { font-size: 16px; color: #ff9a88; }
+QLabel[role="eyebrow"] { font-size: 14px; font-weight: bold; color: #ff5c8a; }
+QLabel[role="clock"] { font-size: 17px; color: #cfc6e0; padding: 0 6px; }
+QLabel[role="field-label"] { font-size: 17px; color: #e2daf0; }
+QLabel[role="field-title"] { font-size: 17px; color: #f4f0fa; }
+QLabel[role="card-title"] { font-size: 16px; font-weight: bold; color: #cfc6e0; }
+QLabel[role="card-note"] { font-size: 16px; color: #a99ec2; }
+QLabel[role="tile-value"], QLabel[role="metric-value"] { font-size: 26px; font-weight: bold; color: #ffffff; }
+QLabel[role="metric-value"][level="safe"] { color: #4ade80; }
+QLabel[role="metric-value"][level="wait"] { color: #fcd34d; }
+QLabel[role="metric-value"][level="danger"] { color: #ff9a88; }
+QLabel[role="metric-value"][level="info"] { color: #c4a8ff; }
+QLabel[role="slider-value"] { font-size: 17px; font-weight: bold; color: #ff5c8a; }
+QLabel[role="list-text"] { font-size: 18px; color: #f4f0fa; }
+QLabel[role="venue-now"] { font-size: 18px; font-weight: bold; color: #ff5c8a; }
+
+QLabel[role="message"] { font-size: 16px; min-height: 24px; }
+QLabel[role="message"][level="info"] { color: #ff5c8a; }
+QLabel[role="message"][level="error"] { color: #ff9a88; font-weight: bold; }
+
+QLabel[role="badge"] {
+    background: #d6155f; border: none; border-radius: 12px;
+    color: #ffffff; font-size: 18px; font-weight: bold;
+}
+QLabel[role="rank"] {
+    font-size: 15px; font-weight: bold; color: #ff5c8a;
+    background: #3a1230; border: 1px solid #8a3a66; border-radius: 8px; min-height: 28px;
+}
+QLabel[role="count"] {
+    font-size: 14px; font-weight: bold; color: #e2daf0;
+    background: #231c38; border-radius: 10px; padding: 3px 10px;
+}
+QLabel[role="dot"] { border-radius: 5px; background: #d6155f; min-height: 10px; max-height: 10px; }
+QLabel[role="dot"][level="wait"] { background: #fbbf24; }
+QLabel[role="dot"][level="danger"] { background: #ff7a66; }
+
+/* status pill (header and pages) */
+QLabel[role="tag"] {
+    font-size: 16px; font-weight: bold; padding: 6px 14px; border-radius: 16px;
+    border: 1px solid #8a3a66; background: #1d1830; color: #ffd0e0;
+}
+QLabel[role="tag"][level="safe"] { color: #4ade80; background: #12352a; border-color: #2f8f5f; }
+QLabel[role="tag"][level="wait"] { color: #fcd34d; background: #3f2e0a; border-color: #b8891a; }
+QLabel[role="tag"][level="danger"] { color: #ff9a88; background: #4a1a1a; border-color: #c4574a; }
+
+/* something the Admin must keep in mind on this page */
+QLabel[role="notice"] {
+    font-size: 16px; color: #ffe2a3; padding: 10px 14px; border-radius: 10px;
+    background: #3f2e0a; border: 1px solid #b8891a;
+}
+
+/* event categories (dashboard alerts, Log filters) */
+QLabel[role="category"] {
+    font-size: 13px; font-weight: bold; padding: 3px 10px; border-radius: 10px;
+    background: #231c38; color: #e2daf0;
+}
+QLabel[role="category"][category="error"] { background: #4a1a1a; color: #ff9a88; }
+QLabel[role="category"][category="warning"] { background: #3f2e0a; color: #fcd34d; }
+QLabel[role="category"][category="safety"] { background: #47240e; color: #ffb784; }
+QLabel[role="category"][category="connection"] { background: #2d2250; color: #c4a8ff; }
+QLabel[role="category"][category="command"] { background: #3a1230; color: #ff5c8a; }
+
+/* --- buttons --- */
+QPushButton {
+    min-height: 46px; padding: 4px 20px; border-radius: 10px;
+    border: 1px solid #4a3d66; background: #1d1830; color: #f4f0fa;
+    font-size: 17px; font-weight: bold;
+}
+QPushButton:hover { background: #281f40; border-color: #ff5c8a; }
+QPushButton:pressed { background: #15111f; }
+QPushButton:disabled { color: #75698f; background: #15111f; border-color: #2a2340; }
+QPushButton[role="primary"] {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ec2a6b, stop:1 #d6155f);
+    border: 1px solid #ff5c8a; color: #ffffff;
+}
+QPushButton[role="primary"]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #6ee7b7, stop:1 #d6155f);
+    border-color: #ff5c8a;
+}
+QPushButton[role="primary"]:pressed { background: #ff5c8a; }
+QPushButton[role="danger"] { background: #4a1a1a; border: 1px solid #c4574a; color: #ff9a88; }
+QPushButton[role="danger"]:hover { background: #5e2222; border-color: #ff7a66; }
+QPushButton[role="danger"]:pressed { background: #3a1313; }
+QPushButton[role="ghost"] {
+    min-height: 36px; font-size: 15px; font-weight: normal; color: #cfc6e0;
+    border: 1px solid #4a3d66; background: transparent;
+}
+QPushButton[role="ghost"]:hover { background: #1d1830; }
+QPushButton[role="primary"]:disabled, QPushButton[role="danger"]:disabled {
+    color: #75698f; background: #15111f; border-color: #2a2340;
+}
+QPushButton[role="logout"] { min-height: 42px; font-size: 16px; }
+QPushButton[role="filter-chip"] {
+    min-height: 36px; padding: 2px 16px; font-size: 15px; font-weight: normal; border-radius: 18px;
+    color: #e2daf0; background: transparent; border: 1px solid #4a3d66;
+}
+QPushButton[role="filter-chip"]:hover { background: #1d1830; border-color: #ff5c8a; }
+QPushButton[role="filter-chip"]:checked {
+    color: #ffffff; background: #d6155f; border-color: #d6155f; font-weight: bold;
+}
+
+/* sidebar navigation: quiet rows, the current page is the green pill (as in the reference) */
+QFrame[role="sidebar"] QScrollBar:vertical { width: 8px; margin: 6px 2px; }
+QFrame[role="sidebar"] QScrollBar::handle:vertical { background: #4a3d66; border-radius: 3px; }
+QPushButton[role="side-nav"] {
+    text-align: left; min-height: 40px; padding: 0 14px;
+    font-size: 18px; font-weight: normal; color: #c9ddd1;
+    background: transparent; border: none; border-left: 4px solid transparent; border-radius: 10px;
+}
+QPushButton[role="side-nav"]:hover { background: #231c38; color: #ffffff; }
+QPushButton[role="side-nav"]:checked {
+    background: #d6155f; color: #ffffff; font-weight: bold; border-left: 4px solid #d6155f;
+}
+
+/* segmented switch between the sub-pages of a merged page */
+QFrame[role="segments"] { background: #0f0c19; border: 1px solid #2a2340; border-radius: 12px; }
+QPushButton[role="segment"] {
+    min-height: 40px; min-width: 120px; padding: 2px 26px; font-size: 17px; font-weight: bold; color: #bdb2d6;
+    background: transparent; border: none; border-radius: 10px;
+}
+QPushButton[role="segment"]:hover { color: #ffffff; background: #1d1830; }
+QPushButton[role="segment"]:checked { background: #d6155f; color: #ffffff; border: 1px solid #ff5c8a; }
+
+/* --- inputs: darker than their panel, so they read as wells --- */
+QLineEdit, QSpinBox, QComboBox {
+    min-height: 46px; padding: 2px 12px; border-radius: 9px;
+    border: 1px solid #3d3358; background: #0f0c19; color: #f4f0fa;
+    selection-background-color: #d6155f; selection-color: #ffffff;
+}
+QLineEdit:hover, QSpinBox:hover, QComboBox:hover { border-color: #6b5a8c; }
+QLineEdit:focus, QSpinBox:focus, QPlainTextEdit:focus, QComboBox:focus { border: 2px solid #d6155f; }
+QLineEdit:disabled, QSpinBox:disabled, QComboBox:disabled { background: #15111f; color: #75698f; }
+QSpinBox::up-button, QSpinBox::down-button { width: 30px; border: none; background: transparent; }
+QSpinBox::up-arrow { image: url(@styles/chevron-up.png); width: 14px; height: 14px; }
+QSpinBox::down-arrow { image: url(@styles/chevron-down.png); width: 14px; height: 14px; }
+QComboBox::drop-down { border: none; width: 36px; }
+QComboBox::down-arrow { image: url(@styles/chevron-down.png); width: 16px; height: 16px; }
+QComboBox QAbstractItemView {
+    background: #15111f; color: #f4f0fa; border: 1px solid #6b5a8c; outline: none; padding: 4px;
+    selection-background-color: #d6155f; selection-color: #ffffff;
+}
+QPlainTextEdit, QTextEdit {
+    border-radius: 10px; border: 1px solid #3d3358; background: #0f0c19; color: #f4f0fa;
+    padding: 8px; selection-background-color: #d6155f; selection-color: #ffffff;
+}
+QPlainTextEdit[role="log"] { font-size: 15px; background: #0f0c19; color: #f4f0fa; border: 1px solid #2a2340; }
+
+QCheckBox { spacing: 12px; min-height: 40px; }
+QCheckBox::indicator { width: 24px; height: 24px; border-radius: 6px; border: 2px solid #6b5a8c; background: #0f0c19; }
+QCheckBox::indicator:hover { border-color: #ff5c8a; }
+QCheckBox::indicator:checked { background: #d6155f; border-color: #d6155f; image: url(@styles/check-dark.png); }
+
+QSlider { min-height: 34px; }
+QSlider::groove:horizontal { height: 6px; border-radius: 3px; background: #2a2340; }
+QSlider::sub-page:horizontal {
+    border-radius: 3px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff5c8a, stop:1 #ff5c8a);
+}
+QSlider::handle:horizontal {
+    width: 18px; height: 18px; margin: -9px 0; border-radius: 12px;
+    background: #f4f0fa; border: 3px solid #d6155f;
+}
+QSlider::handle:horizontal:pressed { background: #d6155f; }
+
+QProgressBar { border: none; border-radius: 5px; background: #2a2340; min-height: 10px; }
+QProgressBar::chunk {
+    border-radius: 5px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff5c8a, stop:1 #ff5c8a);
+}
+
+/* --- tables: roomy rows, soft stripes, nothing squeezed --- */
+QTableWidget {
+    border: 1px solid #2a2340; border-radius: 10px; background: #0f0c19;
+    alternate-background-color: #15111f; gridline-color: #1d1830;
+    font-size: 17px; color: #f4f0fa;
+    selection-background-color: #5a1a40; selection-color: #ffffff;
+}
+QTableWidget::item { padding: 6px 10px; border: none; }
+QTableCornerButton::section { background: #1d1830; border: none; }
+QHeaderView { background: transparent; }
+QHeaderView::section {
+    font-size: 16px; font-weight: bold; padding: 10px 10px;
+    color: #ff5c8a; background: #1d1830; border: none; border-bottom: 2px solid #d6155f;
+}
+
+/* --- scrollbars --- */
+QScrollBar:vertical { width: 12px; margin: 3px; border: none; background: transparent; }
+QScrollBar::handle:vertical { min-height: 48px; background: #4a3d66; border-radius: 4px; }
+QScrollBar::handle:vertical:hover { background: #ff5c8a; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
+QScrollBar:horizontal { height: 12px; margin: 3px; border: none; background: transparent; }
+QScrollBar::handle:horizontal { min-width: 48px; background: #4a3d66; border-radius: 4px; }
+QScrollBar::handle:horizontal:hover { background: #ff5c8a; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+
+/* --- tabs (if any page still uses QTabWidget) --- */
+QTabWidget::pane { border: 1px solid #2a2340; border-radius: 12px; background: #13101d; }
+QTabBar::tab {
+    min-height: 44px; padding: 2px 16px; font-size: 17px; color: #bdb2d6;
+    border: none; border-bottom: 3px solid transparent; background: transparent;
+}
+QTabBar::tab:selected { font-weight: bold; color: #ff5c8a; border-bottom-color: #d6155f; }
+
+QMenu { background: #15111f; border: 1px solid #6b5a8c; padding: 4px; }
+QMenu::item { padding: 8px 20px; border-radius: 6px; }
+QMenu::item:selected { background: #d6155f; color: #ffffff; }
+
+
+/* --- sidebar: a magenta-to-purple gradient, as in the reference; white text on it --- */
+QFrame[role="sidebar"] {
+    border: none; border-radius: 16px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #d6155f, stop:1 #6d28a8);
+}
+QFrame[role="sidebar"] QLabel[role="eyebrow"] { color: #ffd6ea; }
+QFrame[role="sidebar"] QLabel[role="hint"] { color: #f1daf2; }
+QPushButton[role="side-nav"] { color: #ffffff; }
+QPushButton[role="side-nav"]:hover { background: rgba(255, 255, 255, 40); color: #ffffff; }
+QPushButton[role="side-nav"]:checked {
+    background: rgba(12, 10, 20, 150); color: #ffffff; font-weight: bold; border-left: 4px solid #ffffff;
+}
+QFrame[role="sidebar"] QScrollBar::handle:vertical { background: rgba(255, 255, 255, 90); }

@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="th">
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20261015-00-cc32e58","C":{"Abril Fatface":"YACgEZbkUVE,0","Albert Sans":"YAHO2HRfeh4,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo Black":"YACgEZulLoA,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Baloo 2":"YAHO2IcQUcM,0","Barlow Condensed":"YAFdJljEuFc,0","Barlow":"YAFdJsyuOPM,1","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Cairo":"YAFdtXpDzlQ,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Cinzel":"YACgEeV8bIQ,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Figtree":"YAHO2b-mV7A,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Fredoka":"YACgEZml080,0","Georgia":"YAGzXkO0pEM,0","Hanken Grotesk":"YAHO2VB9G0I,0","Helvetica":"YAFcf7zkXN0,0","IBM Plex Mono":"YAFdJkmvhGI,0","IBM Plex Sans":"YAFdJgT0SHI,0","Impact":"YAFcfnjI7Vk,0","Instrument Sans":"YAHO2bKyaSQ,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Italiana":"YAHO2Toik_w,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Karla":"YAHO2V2NSXM,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Libre Caslon Display":"YAHO2XhLmt0,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Noto Sans JP":"YAFdJiHXlcI,0","Noto Sans KR":"YAGsojZj-RQ,0","Nunito Sans":"YAFdtQJYB9w,1","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Open Sans":"YAFdJt8dAY0,1","Oswald":"YACgEQY10lw,0","Outfit":"YAHO2nVlg14,0","Pacifico":"YADLjORQ1u4,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAHO2gdhi18,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Public Sans":"YAFdJj8NdaU,1","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","STIX Two Text":"YAHO2joycuk,0","Sarabun":"YAFdJssSnME,0","Schibsted Grotesk":"YAHO2sWydRk,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Space Grotesk":"YAHO2sjPCSM,0","Space Mono":"YADW1-vpsoc,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0"}}');</script><script src="/_sdk/05db820ba1544614.telemetry_sdk.js" integrity="sha512-a7JzkQDDcioSXpM61nxTfeRW7PcxWQy5+BrhyeTFmQFsXJ+Gncm0y50u7fTA7qOPegFnRgqCfa0mGUOK1yjDWQ=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart AI Reception Robot • Simulation Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#07111e; --card:#0e1c2c; --card2:#102235; --line:#284057; --cyan:#5de2f2; --blue:#428fff; --green:#53d9a1; --amber:#f3bd61; --red:#ff6977; --muted:#91aabd; }
+    * { box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body { margin:0; width:100%; min-width:320px; font-family:'DM Sans',sans-serif; color:#e8f4fb; background:#07111e }
+    button,input,textarea,select { font:inherit }
+    button { cursor:pointer }
+    button:disabled { opacity:.43; cursor:not-allowed }
+    :focus-visible { outline:2px solid var(--cyan); outline-offset:3px }
+    .mono { font-family:'Space Mono',monospace }
+    .shell { width:100%; min-height:calc(100 * min(var(--vh, 1vh), 1vh)); background:radial-gradient(ellipse at 52% 11%,#112d40 0%,transparent 44%),linear-gradient(90deg,#ffffff06 1px,transparent 1px),linear-gradient(#ffffff06 1px,transparent 1px),#07111e; background-size:auto,36px 36px,36px 36px,auto }
+    .app-inner { max-width:1720px; margin:auto; padding:20px clamp(14px,2vw,32px) 34px }
+    .panel { background:rgba(13,28,44,.92); border:1px solid var(--line); border-radius:16px; box-shadow:0 16px 48px #00000024; backdrop-filter:blur(12px) }
+    .panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 19px 13px; border-bottom:1px solid #20374b }
+    .eyebrow { letter-spacing:.16em; font-size:10px; font-weight:700; color:var(--cyan); text-transform:uppercase }
+    .muted { color:var(--muted) }
+    .dashboard-grid { display:grid; grid-template-columns:minmax(255px, .86fr) minmax(360px,1.55fr) minmax(290px,1fr); gap:15px; align-items:stretch }
+    .field { width:100%; background:#091827; border:1px solid #365067; color:#e8f4fb; border-radius:9px; padding:11px 12px; outline:none }
+    .field:focus { border-color:var(--cyan); box-shadow:0 0 0 3px #5de2f223 }
+    .field::placeholder { color:#7290a6 }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:39px; padding:9px 13px; border-radius:9px; font-weight:700; font-size:12px; line-height:1.3; transition:transform .18s,filter .18s,background .18s; border:1px solid transparent }
+    .btn:not(:disabled):hover { transform:translateY(-2px); filter:brightness(1.13) }
+    .btn-primary { background:var(--cyan); color:#06202d }
+    .btn-secondary { background:#19334a; border-color:#365775; color:#daf4ff }
+    .btn-amber { background:#594323; border-color:#a87a36; color:#ffe2a5 }
+    .btn-red { background:#542632; border-color:#a34b5a; color:#ffdce0 }
+    .tag { display:inline-flex; align-items:center; gap:7px; border-radius:100px; border:1px solid #3b596c; background:#122a3b; padding:6px 10px; font-size:10px; font-weight:700; letter-spacing:.07em; white-space:nowrap }
+    .dot { width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor;flex:none }
+    .status-safe { color:var(--green) } .status-wait { color:var(--amber) } .status-danger { color:var(--red) } .status-info { color:var(--cyan) }
+    .method-grid { display:grid;grid-template-columns:1fr 1fr;gap:7px }
+    .method { border:1px solid #365067;background:#102235;color:#aac4d6;border-radius:9px;min-height:43px;padding:7px;font-size:11px;font-weight:700 }
+    .method.selected { border-color:var(--cyan);background:#123d51;color:#a9f6ff;box-shadow:inset 0 0 0 1px #5de2f255 }
+    .metric { border:1px solid #284257;background:#0c2030;border-radius:11px;padding:12px }
+    .robot-stage { position:relative; min-height:470px; display:flex;align-items:center;justify-content:center;overflow:hidden; background:radial-gradient(circle at 50% 47%,#19475a75,transparent 48%),linear-gradient(90deg,#75d9f20b 1px,transparent 1px),linear-gradient(#75d9f20b 1px,transparent 1px);background-size:auto,24px 24px,24px 24px }
+    .robot-stage::after { content:'';position:absolute;bottom:22px;width:53%;height:15px;background:#000b12;border-radius:50%;filter:blur(12px) }
+    .radar { position:absolute;width:370px;height:370px;max-width:90%;aspect-ratio:1;border:1px solid #48b8d330;border-radius:50%;box-shadow:0 0 0 55px #48b8d30b,0 0 0 110px #48b8d307;animation:pulse 3s ease-in-out infinite }
+    .radar::after { content:'';position:absolute;inset:12%;border:1px dashed #5de2f235;border-radius:50% }
+    .radar-sweep { position:absolute;width:340px;height:340px;max-width:85%;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,transparent 295deg,#5de2f222 345deg,#5de2f255 360deg);animation:spin 5s linear infinite }
+    @keyframes spin { to { transform:rotate(360deg) } } @keyframes pulse { 50% { opacity:.47;transform:scale(1.05) } }
+    .robot-svg { width:min(310px,65%);height:auto;position:relative;z-index:2;filter:drop-shadow(0 15px 20px #0008) }
+    .stage-label { position:absolute;z-index:3;background:#091c2bd9;border:1px solid #387087;border-radius:7px;padding:6px 8px;font-size:9px;letter-spacing:.03em;color:#a5eaf4 }
+    .stage-label.left { left:20px;top:29% } .stage-label.right { right:19px;top:54% }
+    .pipeline-step { display:flex;align-items:center;gap:10px;padding:8px 10px;border-left:2px solid #294154;color:#849caf;transition:all .25s }
+    .pipeline-step.active { border-color:var(--cyan);background:#143546;color:#d5fbff }
+    .pipeline-step.done { border-color:var(--green);color:#9aeac9 }
+    .map { position:relative;height:181px;overflow:hidden;border-radius:10px;border:1px solid #345569;background:linear-gradient(90deg,#5de2f212 1px,transparent 1px),linear-gradient(#5de2f212 1px,transparent 1px),#071d2d;background-size:22px 22px }
+    .map svg { position:absolute;inset:0;width:100%;height:100% }
+    .obstacle { position:absolute;top:42%;left:53%;width:22px;height:22px;background:#ff6977;border:3px solid #ffd1d7;box-shadow:0 0 20px #ff6977;border-radius:5px;transform:rotate(14deg) }
+    .map-robot { position:absolute;bottom:17%;left:20%;width:22px;height:22px;background:#5de2f2;border:4px solid #b5f8ff;border-radius:50%;box-shadow:0 0 17px #5de2f2;transition:left .8s,bottom .8s }
+    .map-robot.moving { left:42%;bottom:40% }
+    .timeline-item { position:relative;padding:0 0 13px 18px;border-left:1px solid #345064;font-size:11px }
+    .timeline-item::before { content:'';position:absolute;left:-4px;top:3px;width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 9px var(--cyan) }
+    .timeline-item.danger::before { background:var(--red);box-shadow:0 0 9px var(--red) }
+    .timeline-item:last-child { border-color:transparent;padding-bottom:0 }
+    .scroll-pane { max-height:239px;overflow:auto;scrollbar-color:#35566a transparent }
+    .step-dot { width:7px;height:7px;border-radius:50%;background:#456377;flex:none }
+    .pipeline-step.active .step-dot { background:var(--cyan);box-shadow:0 0 12px var(--cyan) }
+    .pipeline-step.done .step-dot { background:var(--green) }
+    input[type=range] { width:100%;accent-color:#5de2f2;cursor:pointer }
+    .divider { border-top:1px solid #254054 }
+    .lower-grid { display:grid;grid-template-columns:1.1fr .85fr 1.15fr;gap:15px;margin-top:15px }
+    .kb-entry { border:1px solid #2a4457;border-radius:8px;padding:9px;background:#0a1b2a }
+    @media(max-width:1200px){ .dashboard-grid { grid-template-columns:minmax(235px,.9fr) minmax(330px,1.3fr) } .monitor { grid-column:1 / -1 } .monitor-content { display:grid;grid-template-columns:1fr 1fr;gap:18px } .lower-grid { grid-template-columns:1fr 1fr } .knowledge { grid-column:1/-1 } }
+    @media(max-width:700px){ .app-inner { padding:12px 12px 25px } .dashboard-grid,.lower-grid { grid-template-columns:1fr } .monitor,.knowledge { grid-column:auto } .monitor-content { display:block } .robot-stage { min-height:390px } .header-line { align-items:flex-start!important } .header-actions { justify-content:flex-start!important } .stage-label { font-size:8px } }
+    @media(prefers-reduced-motion:reduce){ *,*::before,*::after { animation-duration:.01ms!important;transition-duration:.01ms!important } }
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/570d53629f0b998d.data_sdk.js" type="text/javascript" integrity="sha512-JEN39+V+Nvv9ZZOVS8vNk1iA9ErZJHTdgOw9KzPuMiK7m0I+KPEr/wmTnCFIQVsDjCZgJWfGnFi1IQh2Io2qyA=="></script>
+  <script src="/_sdk/0b63fb8940df03d4.editing_sdk.js" type="text/javascript" integrity="sha512-fFkkekAA7XKU9UcNO+7a7lGi1SDVYUdIo1lpZS9YpfVovu1WAj3C/MEr/w8zt6Jwq6OKflaYkwf4eOUpMYGz9A=="></script>
+  <script src="/_sdk/f195026a424c1f85.resizing_sdk.js" type="text/javascript" integrity="sha512-8On4Z+AXh1abEzZJ9Dbn9wOvFg+k1LsAaAzKGQ7LlfgXajZ9xEmZaZ1QVzv0AWhCZtCsEpWSOG9DgLri06TS7A=="></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full">
+  <div class="shell">
+   <div class="app-inner">
+    <header class="mb-5">
+     <div class="header-line flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+       <div aria-hidden="true" class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#123b4b;border:1px solid #3b91a4;color:#79eafa">
+        <i data-lucide="bot" class="w-6 h-6"></i>
+       </div>
+       <div>
+        <p data-template-id="header-kicker" class="canva-text eyebrow mb-1"></p>
+        <h1 data-template-id="page-title" class="canva-text font-bold leading-tight" style="font-size:clamp(18px,2vw,27px)"></h1>
+       </div>
+      </div>
+      <div class="header-actions flex flex-wrap items-center justify-end gap-2"><span id="clock" class="mono muted text-xs" aria-label="เวลาจำลอง"></span> <span id="status-badge" class="tag status-safe" role="status" aria-live="polite"><span class="dot"></span><span id="status-text">SYSTEM READY</span></span> <button id="reset-button" data-template-id="reset-button" type="button" class="canva-button btn btn-secondary"></button>
+      </div>
+     </div>
+     <p data-template-id="header-description" class="canva-text muted mt-3" style="font-size:12px"></p>
+    </header>
+    <main>
+     <div class="dashboard-grid">
+      <section data-template-id="control-panel" class="canva-panel panel" aria-labelledby="controls-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="control-kicker" class="canva-text eyebrow"></p>
+         <h2 id="controls-title" data-template-id="control-title" class="canva-text font-bold mt-1"></h2>
+        </div><i data-lucide="sliders-horizontal" class="w-5 h-5 muted" aria-hidden="true"></i>
+       </div>
+       <div class="p-4 space-y-5">
+        <div>
+         <div class="flex justify-between gap-2 items-center mb-2"><label data-template-id="distance-label" for="distance" class="canva-text font-semibold" style="font-size:12px"></label> <strong id="distance-value" class="mono status-info text-xs">4.0 m</strong>
+         </div><input id="distance" type="range" min="0.5" max="5" value="4" step="0.1" aria-describedby="distance-help">
+         <div class="flex justify-between mono muted mt-1" style="font-size:10px">
+          <span>0.5 m</span><span>5.0 m</span>
+         </div>
+         <p id="distance-help" data-template-id="distance-help" class="canva-text muted mt-2" style="font-size:11px"></p>
+        </div>
+        <div class="divider pt-4"><label data-template-id="question-label" for="question" class="canva-text block font-semibold mb-2" style="font-size:12px"></label> <textarea id="question" data-template-id="question-placeholder" rows="3" class="canva-input field resize-y" aria-label="คำถามสำหรับหุ่นยนต์"></textarea> <button id="ask-button" data-template-id="ask-button" class="canva-button btn btn-primary w-full mt-2" type="button"></button>
+         <div id="response-box" class="metric mt-3 hidden" aria-live="polite">
+          <p data-template-id="response-label" class="canva-text eyebrow mb-2"></p>
+          <p id="response-text" class="text-sm leading-relaxed"></p>
+         </div>
+        </div>
+        <fieldset class="divider pt-4"><legend data-template-id="method-label" class="canva-text font-semibold mb-3" style="font-size:12px"></legend>
+         <div class="method-grid" id="methods"><button data-template-id="method-voice" data-method="Voice" class="canva-button method selected" type="button" aria-pressed="true"></button> <button data-template-id="method-touch" data-method="Touchscreen" class="canva-button method" type="button" aria-pressed="false"></button> <button data-template-id="method-gesture" data-method="Hand Gesture" class="canva-button method" type="button" aria-pressed="false"></button> <button data-template-id="method-marker" data-method="ArUco Marker" class="canva-button method" type="button" aria-pressed="false"></button>
+         </div>
+        </fieldset>
+        <div class="divider pt-4 space-y-2">
+         <p data-template-id="gateway-label" class="canva-text eyebrow mb-2"></p><button id="request-button" data-template-id="request-button" class="canva-button btn btn-secondary w-full" type="button"></button> <button id="confirm-button" data-template-id="confirm-button" class="canva-button btn btn-primary w-full" type="button" disabled></button>
+         <p id="gateway-note" class="muted text-xs" aria-live="polite">รอคำสั่งนำทาง / Awaiting command</p>
+        </div>
+        <div class="divider pt-4 flex gap-2"><button id="demo-button" data-template-id="demo-button" class="canva-button btn btn-amber flex-1" type="button"></button>
+        </div>
+       </div>
+      </section>
+      <section data-template-id="robot-panel" class="canva-panel panel overflow-hidden" aria-labelledby="robot-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="robot-kicker" class="canva-text eyebrow"></p>
+         <h2 id="robot-title" data-template-id="robot-title" class="canva-text font-bold mt-1"></h2>
+        </div><span class="tag status-info"><span class="dot"></span> DIGITAL TWIN</span>
+       </div>
+       <div class="robot-stage" aria-label="ภาพจำลองหุ่นยนต์ต้อนรับแบบมีถาดสามชั้นและเซนเซอร์">
+        <div class="radar" aria-hidden="true"></div>
+        <div class="radar-sweep" aria-hidden="true"></div><span data-template-id="robot-camera-label" class="canva-tag stage-label left"></span> <span data-template-id="robot-lidar-label" class="canva-tag stage-label right"></span>
+        <svg class="robot-svg" viewbox="0 0 300 440" role="img" aria-label="Compact service robot with OAK-D camera, RPLiDAR, touchscreen, three trays and wheels"><defs>
+          <lineargradient id="metal" x1="0" x2="1">
+           <stop stop-color="#596f80" />
+           <stop offset=".43" stop-color="#d1e4ed" />
+           <stop offset=".78" stop-color="#8099aa" />
+           <stop offset="1" stop-color="#455b6b" />
+          </lineargradient>
+          <lineargradient id="glass" x1="0" x2="1" y1="0" y2="1">
+           <stop stop-color="#67d9ef" stop-opacity=".22" />
+           <stop offset="1" stop-color="#a9f4ff" stop-opacity=".03" />
+          </lineargradient>
+         </defs> <ellipse cx="150" cy="410" rx="92" ry="14" fill="#000c15" opacity=".6" /> <rect x="74" y="367" width="152" height="28" rx="9" fill="url(#metal)" stroke="#d0e6f0" stroke-width="2" /> <path d="M78 375h145" stroke="#67e4f4" stroke-width="3" /> <circle cx="92" cy="397" r="18" fill="#16232d" stroke="#829baa" stroke-width="6" /><circle cx="208" cy="397" r="18" fill="#16232d" stroke="#829baa" stroke-width="6" /> <circle cx="68" cy="390" r="7" fill="#9eb0b8" /><circle cx="232" cy="390" r="7" fill="#9eb0b8" /> <circle cx="74" cy="414" r="5" fill="#9eb0b8" /><circle cx="226" cy="414" r="5" fill="#9eb0b8" /> <rect x="85" y="96" width="13" height="273" rx="3" fill="url(#metal)" /><rect x="202" y="96" width="13" height="273" rx="3" fill="url(#metal)" /> <rect x="99" y="103" width="102" height="260" fill="url(#glass)" stroke="#94d7e5" stroke-opacity=".5" /> <rect x="80" y="157" width="140" height="11" rx="3" fill="url(#metal)" stroke="#b6d1de" /> <rect x="80" y="232" width="140" height="11" rx="3" fill="url(#metal)" stroke="#b6d1de" /> <rect x="80" y="307" width="140" height="11" rx="3" fill="url(#metal)" stroke="#b6d1de" /> <path d="M85 168h130v5H85zm0 75h130v5H85zm0 75h130v5H85z" fill="#19374b" /> <rect x="101" y="176" width="98" height="48" rx="5" fill="#85def0" fill-opacity=".08" stroke="#8cdef0" stroke-opacity=".3" /> <rect x="101" y="251" width="98" height="48" rx="5" fill="#85def0" fill-opacity=".08" stroke="#8cdef0" stroke-opacity=".3" /> <rect x="101" y="326" width="98" height="34" rx="5" fill="#85def0" fill-opacity=".08" stroke="#8cdef0" stroke-opacity=".3" /> <rect x="70" y="94" width="160" height="68" rx="12" fill="url(#metal)" stroke="#e0eff4" stroke-width="2" /> <rect x="84" y="102" width="132" height="51" rx="7" fill="#071923" /> <rect x="91" y="109" width="118" height="37" rx="4" fill="#123e50" /> <circle cx="111" cy="127" r="7" fill="#5de2f2" /><circle cx="189" cy="127" r="7" fill="#5de2f2" /> <path d="M134 135q16 9 32 0" fill="none" stroke="#5de2f2" stroke-width="2" stroke-linecap="round" /> <rect x="108" y="67" width="84" height="24" rx="5" fill="#101820" stroke="#667d88" stroke-width="2" /> <circle cx="127" cy="79" r="6" fill="#0d4d69" stroke="#61cceb" /><circle cx="173" cy="79" r="6" fill="#0d4d69" stroke="#61cceb" /> <circle cx="150" cy="79" r="3" fill="#76e6fa" /> <path d="M150 67V55" stroke="url(#metal)" stroke-width="7" /> <ellipse cx="150" cy="52" rx="34" ry="11" fill="#26333e" stroke="#92a7ad" stroke-width="3" /> <ellipse cx="150" cy="48" rx="24" ry="5" fill="#4f6977" /> <path d="M90 375h120" stroke="#8cdded" stroke-opacity=".5" />
+        </svg>
+       </div>
+       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-4">
+        <div class="metric">
+         <p data-template-id="spec-height" class="canva-text muted" style="font-size:10px"></p><strong class="mono text-xs">80 cm</strong>
+        </div>
+        <div class="metric">
+         <p data-template-id="spec-base" class="canva-text muted" style="font-size:10px"></p><strong class="mono text-xs">40 × 40 cm</strong>
+        </div>
+        <div class="metric">
+         <p data-template-id="spec-display" class="canva-text muted" style="font-size:10px"></p><strong class="mono text-xs">10 inch</strong>
+        </div>
+        <div class="metric">
+         <p data-template-id="spec-mobility" class="canva-text muted" style="font-size:10px"></p><strong class="mono text-xs">2 hub + 4 caster</strong>
+        </div>
+       </div>
+       <p data-template-id="robot-description" class="canva-text muted px-4 pb-4" style="font-size:11px"></p>
+      </section>
+      <section data-template-id="monitor-panel" class="canva-panel panel monitor" aria-labelledby="monitor-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="monitor-kicker" class="canva-text eyebrow"></p>
+         <h2 id="monitor-title" data-template-id="monitor-title" class="canva-text font-bold mt-1"></h2>
+        </div><i data-lucide="activity" class="w-5 h-5 status-info" aria-hidden="true"></i>
+       </div>
+       <div class="p-4 monitor-content">
+        <div>
+         <div class="flex justify-between items-center mb-3">
+          <span data-template-id="sensor-label" class="canva-text eyebrow"></span><span id="mic-state" class="tag status-wait">MIC OFF</span>
+         </div>
+         <div class="grid grid-cols-2 gap-2 mb-4">
+          <div class="metric">
+           <p class="muted text-xs">OAK-D STEREO</p><strong id="vision-status" class="status-wait text-xs">SCANNING</strong>
+          </div>
+          <div class="metric">
+           <p class="muted text-xs">RPLiDAR</p><strong id="lidar-status" class="status-safe text-xs">CLEAR</strong>
+          </div>
+         </div>
+         <p data-template-id="pipeline-label" class="canva-text eyebrow mb-2"></p>
+         <div id="pipeline" class="mb-4">
+          <div class="pipeline-step" data-step="0">
+           <span class="step-dot"></span><span data-template-id="step-speech" class="canva-text text-xs"></span>
+          </div>
+          <div class="pipeline-step" data-step="1">
+           <span class="step-dot"></span><span data-template-id="step-whisper" class="canva-text text-xs"></span>
+          </div>
+          <div class="pipeline-step" data-step="2">
+           <span class="step-dot"></span><span data-template-id="step-database" class="canva-text text-xs"></span>
+          </div>
+          <div class="pipeline-step" data-step="3">
+           <span class="step-dot"></span><span data-template-id="step-rag" class="canva-text text-xs"></span>
+          </div>
+          <div class="pipeline-step" data-step="4">
+           <span class="step-dot"></span><span data-template-id="step-gemini" class="canva-text text-xs"></span>
+          </div>
+          <div class="pipeline-step" data-step="5">
+           <span class="step-dot"></span><span data-template-id="step-tts" class="canva-text text-xs"></span>
+          </div>
+         </div>
+        </div>
+        <div class="divider pt-4 monitor-map-area">
+         <div class="flex justify-between items-center mb-2">
+          <p data-template-id="map-label" class="canva-text eyebrow"></p><span class="mono muted" style="font-size:9px">ROS2 NAV2 / 2D</span>
+         </div>
+         <div class="map" role="img" aria-label="แผนที่จำลองเส้นทางหุ่นยนต์และสิ่งกีดขวาง">
+          <svg viewbox="0 0 300 180" preserveaspectratio="none" aria-hidden="true">
+           <path d="M22 143H99V101H170V45H272" fill="none" stroke="#5de2f2" stroke-width="2" stroke-dasharray="6 5" opacity=".7" /><path d="M15 39h100v33H15M196 104h78v63h-78" fill="none" stroke="#3a6378" stroke-width="8" opacity=".6" /><circle cx="271" cy="45" r="8" fill="#53d9a1" />
+          </svg><span id="map-robot" class="map-robot"></span><span id="map-obstacle" class="obstacle hidden"></span>
+         </div>
+         <div class="flex justify-between gap-2 mt-3 text-xs">
+          <span data-template-id="obstacle-label" class="canva-text muted"></span><strong id="obstacle-distance" class="mono status-safe">CLEAR</strong>
+         </div>
+         <div class="grid grid-cols-2 gap-2 mt-3"><button id="obstacle-button" data-template-id="obstacle-button" class="canva-button btn btn-red" type="button"></button> <button id="clear-button" data-template-id="clear-button" class="canva-button btn btn-secondary" type="button"></button> <button id="resume-button" data-template-id="resume-button" class="canva-button btn btn-primary col-span-2" type="button"></button>
+         </div>
+         <p data-template-id="safety-note" class="canva-text muted mt-3" style="font-size:10px"></p>
+        </div>
+       </div>
+      </section>
+     </div>
+     <div class="lower-grid">
+      <section data-template-id="timeline-panel" class="canva-panel panel" aria-labelledby="timeline-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="timeline-kicker" class="canva-text eyebrow"></p>
+         <h2 id="timeline-title" data-template-id="timeline-title" class="canva-text font-bold mt-1"></h2>
+        </div><i data-lucide="list-filter" class="w-5 h-5 muted" aria-hidden="true"></i>
+       </div>
+       <div id="timeline" class="scroll-pane p-4" role="log" aria-live="polite"></div>
+      </section>
+      <section data-template-id="admin-panel" class="canva-panel panel" aria-labelledby="admin-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="admin-kicker" class="canva-text eyebrow"></p>
+         <h2 id="admin-title" data-template-id="admin-title" class="canva-text font-bold mt-1"></h2>
+        </div><i data-lucide="chart-no-axes-combined" class="w-5 h-5 muted" aria-hidden="true"></i>
+       </div>
+       <div class="p-4">
+        <div class="grid grid-cols-2 gap-2">
+         <div class="metric">
+          <p data-template-id="visitors-label" class="canva-text muted mb-1" style="font-size:10px"></p><strong id="visitors-count" class="mono text-xl status-info">0</strong>
+         </div>
+         <div class="metric">
+          <p data-template-id="conversations-label" class="canva-text muted mb-1" style="font-size:10px"></p><strong id="conversations-count" class="mono text-xl status-safe">0</strong>
+         </div>
+         <div class="metric">
+          <p data-template-id="response-time-label" class="canva-text muted mb-1" style="font-size:10px"></p><strong id="response-time" class="mono text-xl">—</strong>
+         </div>
+         <div class="metric">
+          <p data-template-id="unanswered-label" class="canva-text muted mb-1" style="font-size:10px"></p><strong id="unanswered-count" class="mono text-xl status-wait">0</strong>
+         </div>
+        </div>
+        <p data-template-id="metrics-note" class="canva-text muted mt-3" style="font-size:11px"></p>
+       </div>
+      </section>
+      <section data-template-id="knowledge-panel" class="canva-panel panel knowledge" aria-labelledby="knowledge-title">
+       <div class="panel-head">
+        <div>
+         <p data-template-id="knowledge-kicker" class="canva-text eyebrow"></p>
+         <h2 id="knowledge-title" data-template-id="knowledge-title" class="canva-text font-bold mt-1"></h2>
+        </div><span id="knowledge-count" class="tag status-info">2 ENTRIES</span>
+       </div>
+       <div class="p-4">
+        <form id="knowledge-form" class="space-y-2"><label data-template-id="kb-question-label" for="kb-question" class="canva-text block text-xs font-semibold"></label> <input id="kb-question" data-template-id="kb-question-placeholder" class="canva-input field" required> <label data-template-id="kb-answer-label" for="kb-answer" class="canva-text block text-xs font-semibold"></label> <input id="kb-answer" data-template-id="kb-answer-placeholder" class="canva-input field" required> <button data-template-id="kb-add-button" class="canva-button btn btn-secondary w-full" type="submit"></button>
+        </form>
+        <p id="kb-message" class="status-safe text-xs mt-2 min-h-4" role="status"></p>
+        <div id="knowledge-list" class="space-y-2 mt-3 scroll-pane" aria-label="รายการฐานความรู้"></div>
+       </div>
+      </section>
+     </div>
+    </main>
+    <footer class="pt-4 text-center">
+     <p data-template-id="footer-note" class="canva-text muted" style="font-size:10px"></p>
+    </footer>
+   </div>
+  </div>
+  <script type="module">
+    import React, { useEffect, useRef, useState } from 'https://esm.sh/react@18.3.1';
+    import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
+
+    // React owns simulation state; the static dashboard remains usable while CDN modules load.
+    const h = React.createElement;
+    const initialKnowledge = [
+      { id: 1, question: 'ห้องประชุมอยู่ที่ไหน', answer: 'ห้องประชุมอยู่ชั้น 2 ทางเดินด้านขวาหลังเคาน์เตอร์ต้อนรับ' },
+      { id: 2, question: 'What are the opening hours?', answer: 'Reception is open Monday to Friday, 09:00–17:00.' }
+    ];
+    const stages = ['SYSTEM READY','PERSON DETECTED','LISTENING','AI PROCESSING','MULTIMODAL INPUT','COMMAND CONFIRMATION','NAVIGATING','SAFETY STOP','ADMIN UPDATE','SIMULATION COMPLETE'];
+    const $ = id => document.getElementById(id);
+    const formatTime = () => new Date().toLocaleTimeString('th-TH', {hour12:false});
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    function App() {
+      const [state, setState] = useState('SYSTEM READY');
+      const [distance, setDistance] = useState(4);
+      const [method, setMethod] = useState('Voice');
+      const [obstacle, setObstacle] = useState(false);
+      const [confirmed, setConfirmed] = useState(false);
+      const [pending, setPending] = useState(false);
+      const [busy, setBusy] = useState(false);
+      const [demo, setDemo] = useState(false);
+      const [pipeline, setPipeline] = useState(-1);
+      const [knowledge, setKnowledge] = useState(initialKnowledge);
+      const [visitors, setVisitors] = useState(0);
+      const [conversations, setConversations] = useState(0);
+      const [unanswered, setUnanswered] = useState(0);
+      const [events, setEvents] = useState([{ id:0, time:formatTime(), state:'SYSTEM READY', detail:'ระบบจำลองพร้อมใช้งาน / Simulation initialized' }]);
+      const [message, setMessage] = useState('');
+      const [answer, setAnswer] = useState('');
+      const runRef = useRef(0);
+      const eventId = useRef(1);
+      const distanceRef = useRef(4);
+      const obstacleRef = useRef(false);
+      const confirmedRef = useRef(false);
+      const knowledgeRef = useRef(initialKnowledge);
+      const eventsRef = useRef([]);
+      const demoRef = useRef(false);
+      const busyRef = useRef(false);
+
+      function log(next, detail) {
+        setState(next);
+        setEvents(old => [{id:eventId.current++,time:formatTime(),state:next,detail},...old].slice(0,40));
+      }
+      function setVisitorDistance(raw) {
+        const value = Number(raw);
+        const previous = distanceRef.current;
+        distanceRef.current = value;
+        setDistance(value);
+        if (value <= 3 && previous > 3) {
+          setVisitors(n => n + 1);
+          log('PERSON DETECTED','OAK-D ตรวจพบผู้มาเยือนในระยะ 3.0 m');
+        }
+        if (value <= 1.5 && previous > 1.5) log('LISTENING','เปิดไมโครโฟนอัตโนมัติในระยะ 1.5 m');
+        if (value > 1.5 && previous <= 1.5 && value <= 3) log('PERSON DETECTED','ผู้มาเยือนออกจากระยะไมโครโฟน');
+        if (value > 3 && previous <= 3) log('SYSTEM READY','ผู้มาเยือนออกจากพื้นที่ตรวจจับ');
+      }
+      function selectMethod(value) {
+        setMethod(value);
+        if (distanceRef.current <= 3) log('MULTIMODAL INPUT',`เลือกช่องทางรับข้อมูล: ${value}`);
+        else setMessage('เลือกรูปแบบแล้ว • เลื่อน Visitor Distance ให้ไม่เกิน 3.0 m เพื่อเริ่ม');
+      }
+      async function processQuestion(question, token = runRef.current) {
+        if (busyRef.current) return false;
+        if (distanceRef.current > 3) { setMessage('กรุณาเลื่อนผู้มาเยือนเข้ามาในระยะตรวจจับ ≤ 3.0 m'); return false; }
+        if (!question.trim()) { setMessage('กรุณากรอกคำถามก่อนเริ่ม AI Pipeline'); return false; }
+        busyRef.current = true; setBusy(true); setAnswer(''); setMessage('');
+        log('AI PROCESSING','เริ่มประมวลผลคำถามด้วย AI Pipeline จำลอง');
+        for (let i=0;i<6;i++) {
+          if (token !== runRef.current) return false;
+          setPipeline(i);
+          await wait(390);
+        }
+        if (token !== runRef.current) return false;
+        const query = question.trim().toLocaleLowerCase();
+        const found = knowledgeRef.current.find(item => item.question.toLocaleLowerCase() === query || query.includes(item.question.toLocaleLowerCase()));
+        if (found) { setAnswer(found.answer); setConversations(n => n+1); log('MULTIMODAL INPUT','ตอบคำถามจาก Knowledge Base ผ่าน Thai/English TTS จำลอง'); }
+        else { setAnswer('ยังไม่พบคำตอบใน Knowledge Base กรุณาติดต่อเจ้าหน้าที่ต้อนรับ / No matching knowledge entry found.'); setUnanswered(n => n+1); log('MULTIMODAL INPUT','ไม่พบคำตอบที่ตรงกันใน Knowledge Base'); }
+        setPipeline(6); busyRef.current=false; setBusy(false);
+        return true;
+      }
+      function requestNavigation() {
+        if (distanceRef.current > 3) { setMessage('ต้องตรวจพบผู้มาเยือนก่อนขอคำสั่งนำทาง'); return; }
+        setPending(true); setMessage('');
+        log('COMMAND CONFIRMATION','รอผู้ใช้ยืนยันคำสั่งก่อนหุ่นยนต์เคลื่อนที่');
+      }
+      function confirmNavigation() {
+        if (!pending || obstacleRef.current) return;
+        setPending(false); setConfirmed(true); confirmedRef.current=true;
+        log('NAVIGATING','ผู้ใช้ยืนยันแล้ว • ROS2 Nav2 เริ่มนำทางจำลอง');
+      }
+      function addObstacle() {
+        if (obstacleRef.current) { setMessage('มีสิ่งกีดขวางอยู่แล้ว • กด Clear Path เพื่อนำออก'); return; }
+        obstacleRef.current=true; setObstacle(true);setPending(false);
+        log('SAFETY STOP','RPLiDAR พบสิ่งกีดขวางระยะ 0.5 m ≤ 0.7 m • Emergency Stop');
+      }
+      function clearPath() {
+        if (!obstacleRef.current) { setMessage('เส้นทางปลอดภัยอยู่แล้ว / Path is clear'); return; }
+        obstacleRef.current=false;setObstacle(false);
+        log('SAFETY STOP','นำสิ่งกีดขวางออกแล้ว • รอกด Resume Navigation');
+      }
+      function resume() {
+        if (obstacleRef.current) { setMessage('ยังมีสิ่งกีดขวาง • กด Clear Path ก่อน'); return; }
+        if (!confirmedRef.current) { setMessage('ต้องยืนยันคำสั่งนำทางก่อนกด Resume'); return; }
+        setMessage('');
+        log('NAVIGATING','เส้นทางปลอดภัย • ดำเนินการนำทางต่อ');
+      }
+      function addKnowledge(event) {
+        event.preventDefault();
+        const question=$('kb-question').value.trim(), response=$('kb-answer').value.trim();
+        if (!question || !response) return;
+        const next=[...knowledgeRef.current,{id:Date.now(),question,answer:response}];
+        knowledgeRef.current=next;setKnowledge(next);
+        $('knowledge-form').reset();
+        setMessage('เพิ่มคำตอบลง Knowledge Base แล้ว');
+        log('ADMIN UPDATE',`เพิ่มคำตอบใหม่: ${question}`);
+      }
+      function reset() {
+        runRef.current++;
+        demoRef.current=false;busyRef.current=false;distanceRef.current=4;obstacleRef.current=false;confirmedRef.current=false;knowledgeRef.current=initialKnowledge;
+        setDemo(false);setBusy(false);setState('SYSTEM READY');setDistance(4);setMethod('Voice');setObstacle(false);setConfirmed(false);setPending(false);setPipeline(-1);setKnowledge(initialKnowledge);setVisitors(0);setConversations(0);setUnanswered(0);setAnswer('');setMessage('');
+        $('question').value='';$('knowledge-form').reset();
+        setEvents([{id:eventId.current++,time:formatTime(),state:'SYSTEM READY',detail:'รีเซ็ตสถานะและข้อมูลจำลองแล้ว'}]);
+      }
+      async function autoDemo() {
+        if (demoRef.current) { runRef.current++;demoRef.current=false;busyRef.current=false;setDemo(false);setBusy(false);setPipeline(-1);setMessage('หยุด Auto Demo แล้ว');return; }
+        reset();
+        const token=runRef.current;
+        demoRef.current=true;setDemo(true);
+        const next=async(ms=850)=>{await wait(ms);return runRef.current===token};
+        if (!await next(550)) return;
+        setVisitorDistance(2.7);
+        if (!await next()) return;
+        setVisitorDistance(1.2);
+        if (!await next()) return;
+        $('question').value='ห้องประชุมอยู่ที่ไหน';
+        if (!await processQuestion('ห้องประชุมอยู่ที่ไหน',token)) return;
+        if (!await next()) return;
+        selectMethod('Touchscreen');
+        if (!await next()) return;
+        setPending(true);log('COMMAND CONFIRMATION','Auto Demo: รอการยืนยันคำสั่งนำทางจำลอง');
+        if (!await next()) return;
+        setPending(false);setConfirmed(true);confirmedRef.current=true;log('NAVIGATING','Auto Demo: ยืนยันคำสั่งและเริ่มนำทาง');
+        if (!await next()) return;
+        addObstacle();
+        if (!await next()) return;
+        clearPath();
+        if (!await next(500)) return;
+        resume();
+        if (!await next()) return;
+        const nextKB=[...knowledgeRef.current,{id:Date.now(),question:'Where is the reception desk?',answer:'The reception desk is at the main entrance on the ground floor.'}];
+        knowledgeRef.current=nextKB;setKnowledge(nextKB);log('ADMIN UPDATE','Auto Demo: เพิ่มข้อมูลใหม่ใน Knowledge Base');
+        if (!await next()) return;
+        log('SIMULATION COMPLETE','ลำดับการทำงานจำลองครบทุกขั้นตอน');
+        demoRef.current=false;setDemo(false);
+      }
+
+      useEffect(() => {
+        const listeners = [
+          ['distance','input',e=>setVisitorDistance(e.target.value)],
+          ['ask-button','click',()=>processQuestion($('question').value)],
+          ['request-button','click',requestNavigation],
+          ['confirm-button','click',confirmNavigation],
+          ['obstacle-button','click',addObstacle],
+          ['clear-button','click',clearPath],
+          ['resume-button','click',resume],
+          ['reset-button','click',reset],
+          ['demo-button','click',autoDemo],
+          ['knowledge-form','submit',addKnowledge]
+        ];
+        listeners.forEach(([id,event,handler])=>$(id).addEventListener(event,handler));
+        const methodsHandler=e=>{const button=e.target.closest('[data-method]');if(button) selectMethod(button.dataset.method)};
+        $('methods').addEventListener('click',methodsHandler);
+        const tick=()=>{$('clock').textContent=formatTime()};
+        tick();const timer=setInterval(tick,1000);
+        return ()=>{listeners.forEach(([id,event,handler])=>$(id).removeEventListener(event,handler));$('methods').removeEventListener('click',methodsHandler);clearInterval(timer)};
+      },[pending]);
+
+      useEffect(()=>{
+        $('distance').value=distance;
+        $('distance-value').textContent=distance.toFixed(1)+' m';
+        $('status-text').textContent=state;
+        $('status-badge').className='tag '+(state==='SAFETY STOP'?'status-danger':state==='NAVIGATING'||state==='PERSON DETECTED'||state==='LISTENING'||state==='SIMULATION COMPLETE'?'status-safe':state==='COMMAND CONFIRMATION'?'status-wait':'status-info');
+        $('mic-state').textContent=distance<=1.5?'MIC ACTIVE':'MIC OFF';
+        $('mic-state').className='tag '+(distance<=1.5?'status-safe':'status-wait');
+        $('vision-status').textContent=distance<=3?'PERSON DETECTED':'SCANNING';
+        $('vision-status').className=distance<=3?'status-safe text-xs':'status-wait text-xs';
+        $('lidar-status').textContent=obstacle?'STOP • 0.5 m':'CLEAR';
+        $('lidar-status').className=obstacle?'status-danger text-xs':'status-safe text-xs';
+        $('obstacle-distance').textContent=obstacle?'0.5 m / STOP':'CLEAR';
+        $('obstacle-distance').className='mono '+(obstacle?'status-danger':'status-safe');
+        $('map-obstacle').classList.toggle('hidden',!obstacle);
+        $('map-robot').classList.toggle('moving',state==='NAVIGATING');
+        $('confirm-button').disabled=!pending||obstacle||demo;
+        $('ask-button').disabled=busy||demo;
+        $('request-button').disabled=demo||busy;
+        $('resume-button').disabled=demo;
+        $('obstacle-button').disabled=demo;
+        $('clear-button').disabled=demo;
+        $('demo-button').textContent=demo?'Stop Auto Demo':'▶ Auto Demo Mode';
+        $('gateway-note').textContent=pending?'รอการยืนยันจากผู้ใช้ / Awaiting confirmation':confirmed?'คำสั่งได้รับการยืนยันแล้ว / Command authorized':'รอคำสั่งนำทาง / Awaiting command';
+        $('methods').querySelectorAll('[data-method]').forEach(button=>{const selected=button.dataset.method===method;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected))});
+        $('pipeline').querySelectorAll('[data-step]').forEach((item,i)=>{item.classList.toggle('active',pipeline===i);item.classList.toggle('done',pipeline>i)});
+        $('response-box').classList.toggle('hidden',!answer);
+        $('response-text').textContent=answer;
+        $('kb-message').textContent=message;
+        $('visitors-count').textContent=visitors;
+        $('conversations-count').textContent=conversations;
+        $('unanswered-count').textContent=unanswered;
+        $('response-time').textContent=conversations?'2.3s':'—';
+        $('knowledge-count').textContent=knowledge.length+' ENTRIES';
+      },[state,distance,method,obstacle,pending,confirmed,busy,demo,pipeline,answer,knowledge,visitors,conversations,unanswered,message]);
+
+      useEffect(()=>{
+        const list=$('timeline');
+        const known=new Map([...list.children].map(el=>[Number(el.dataset.eventId),el]));
+        events.forEach(event=>{
+          let el=known.get(event.id);
+          if(!el){
+            el=document.createElement('div');el.dataset.eventId=event.id;el.className='timeline-item'+(event.state==='SAFETY STOP'?' danger':'');
+            const top=document.createElement('div');top.className='flex justify-between gap-2';
+            const title=document.createElement('strong');title.className='mono status-info';title.textContent=event.state;
+            if(event.state==='SAFETY STOP')title.className='mono status-danger';
+            const time=document.createElement('time');time.className='mono muted';time.textContent=event.time;
+            top.append(title,time);
+            const description=document.createElement('p');description.className='muted mt-1';description.textContent=event.detail;
+            el.append(top,description);
+          }
+          list.appendChild(el);known.delete(event.id);
+        });
+        known.forEach(el=>el.remove());
+        [...list.children].reverse().forEach(el=>list.prepend(el));
+      },[events]);
+
+      useEffect(()=>{
+        const list=$('knowledge-list');
+        const known=new Map([...list.children].map(el=>[Number(el.dataset.entryId),el]));
+        knowledge.forEach(entry=>{
+          let el=known.get(entry.id);
+          if(!el){el=document.createElement('div');el.dataset.entryId=entry.id;el.className='kb-entry';const q=document.createElement('p');q.className='text-xs font-semibold status-info';q.textContent=entry.question;const a=document.createElement('p');a.className='text-xs muted mt-1';a.textContent=entry.answer;el.append(q,a);list.appendChild(el)}
+          known.delete(entry.id);
+        });
+        known.forEach(el=>el.remove());
+      },[knowledge]);
+      return null;
+    }
+    createRoot(document.createElement('div')).render(h(App));
+    if(window.lucide) window.lucide.createIcons();
+  </script>
+ </body>
+</html>

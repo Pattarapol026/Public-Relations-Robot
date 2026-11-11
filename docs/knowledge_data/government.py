@@ -1,0 +1,142 @@
+"""Government office."""
+VENUE = "government"
+
+ENTRIES = [
+    ("บริการทั่วไป", "รับบัตรคิวที่ไหน",
+     "รับบัตรคิวได้ที่ตู้กดบัตรคิวหรือจุดประชาสัมพันธ์ใกล้ทางเข้าครับ เลือกประเภทบริการที่ต้องการ แล้วรอเรียกหมายเลข",
+     "Where do I get a queue ticket?",
+     "Take a queue ticket from the ticket machine or the information counter near the entrance. "
+     "Choose the service you need, then wait for your number.",
+     "คิว,บัตรคิว,queue,ticket,number", True),
+    ("บริการทั่วไป", "เปิดให้บริการกี่โมง",
+     "หน่วยงานราชการโดยทั่วไปเปิดวันจันทร์ถึงศุกร์ เว้นวันหยุดราชการครับ เวลารับคิวของแต่ละบริการสอบถามจุดประชาสัมพันธ์ได้",
+     "What are your opening hours?",
+     "Government offices are generally open Monday to Friday, except public holidays. "
+     "Ask the information counter for each service's queue times.",
+     "เวลา,เปิด,ปิด,office hours,open", True),
+    ("บริการทั่วไป", "วันเสาร์เปิดไหม",
+     "บางหน่วยงานเปิดบริการบางประเภทในวันเสาร์ครับ สอบถามจุดประชาสัมพันธ์หรือดูประกาศของหน่วยงาน",
+     "Are you open on Saturday?",
+     "Some offices open for certain services on Saturdays. Ask the information counter or check "
+     "the office's announcements.",
+     "เสาร์,วันหยุด,weekend,saturday", False),
+    ("บริการทั่วไป", "ไม่รู้ว่าต้องติดต่อช่องไหน",
+     "บอกเรื่องที่ต้องการติดต่อกับจุดประชาสัมพันธ์ได้เลยครับ เจ้าหน้าที่จะแนะนำช่องบริการและเอกสารที่ต้องใช้",
+     "I don't know which counter to go to.",
+     "Tell the information counter what you need. They will direct you to the right counter "
+     "and tell you which documents to bring.",
+     "ช่องไหน,ติดต่อที่ไหน,which counter,where to go", False),
+    ("บัตรประชาชน", "ทำบัตรประชาชนที่ไหน",
+     "ทำบัตรประชาชนได้ที่ช่องบริการงานทะเบียนและบัตรครับ รับบัตรคิวก่อน แล้วรอเรียกหมายเลข",
+     "Where do I get an ID card?",
+     "ID cards are made at the registration and ID card counter. Take a queue ticket first and "
+     "wait for your number.",
+     "บัตรประชาชน,ทำบัตร,id card,identity card", True),
+    ("บัตรประชาชน", "ทำบัตรประชาชนใหม่ต้องใช้เอกสารอะไร",
+     "บัตรหมดอายุใช้บัตรเดิมครับ ถ้าบัตรหายหรือชำรุดอาจต้องใช้เอกสารราชการที่มีรูปถ่ายหรือบุคคลรับรอง "
+     "สอบถามรายการที่แน่นอนตามกรณีของคุณที่ช่องบริการครับ",
+     "What documents do I need for a new ID card?",
+     "For an expired card, bring the old card. If it is lost or damaged you may need another "
+     "official photo document or a person to vouch for you. Ask at the counter for the exact "
+     "list for your case.",
+     "เอกสาร,บัตรประชาชน,ทำบัตรใหม่,บัตรใหม่,เตรียม,documents", True),
+    ("บัตรประชาชน", "บัตรประชาชนหายต้องทำอย่างไร",
+     "มาติดต่อขอทำบัตรใหม่ที่ช่องบริการงานบัตรครับ เจ้าหน้าที่จะบันทึกเรื่องบัตรหายและแจ้งเอกสารที่ต้องใช้",
+     "I lost my ID card. What should I do?",
+     "Apply for a new card at the ID card counter. The staff will record the loss and tell you "
+     "which documents you need.",
+     "บัตรหาย,บัตรประชาชนหาย,lost id card,id card,lost my id,lost", False),
+    ("บัตรประชาชน", "ทำบัตรประชาชนเสียค่าธรรมเนียมไหม",
+     "ค่าธรรมเนียมขึ้นกับกรณีครับ เช่น บัตรหมดอายุ บัตรหาย หรือเปลี่ยนข้อมูล สอบถามที่ช่องบริการก่อนยื่นเรื่องได้ครับ",
+     "Is there a fee for an ID card?",
+     "It depends on the case, for example an expired, lost or changed card. Ask at the counter "
+     "before you apply.",
+     "ค่าธรรมเนียม,ค่าทำบัตร,fee,cost", False),
+    ("ทะเบียนราษฎร์", "แจ้งย้ายที่อยู่ทำอย่างไร",
+     "แจ้งย้ายที่อยู่ได้ที่งานทะเบียนราษฎร์ครับ โดยทั่วไปใช้บัตรประชาชนและทะเบียนบ้านฉบับเจ้าบ้าน "
+     "และอาจต้องมีความยินยอมของเจ้าบ้าน สอบถามรายละเอียดที่ช่องบริการครับ",
+     "How do I register a change of address?",
+     "Go to the civil registration counter. Usually you need your ID card and the house "
+     "registration book, and possibly the house owner's consent. Ask at the counter for details.",
+     "ย้ายที่อยู่,ย้ายบ้าน,ย้ายเข้า,ย้ายออก,ทะเบียนบ้าน,change address,move", False),
+    ("ทะเบียนราษฎร์", "คัดสำเนาทะเบียนบ้านได้ที่ไหน",
+     "ขอคัดสำเนาทะเบียนบ้านได้ที่ช่องบริการงานทะเบียนราษฎร์ครับ นำบัตรประชาชนมาด้วย",
+     "Where can I get a copy of my house registration?",
+     "At the civil registration counter. Please bring your ID card.",
+     "ทะเบียนบ้าน,สำเนา,คัดสำเนา,house registration", False),
+    ("ทะเบียนราษฎร์", "แจ้งเกิดต้องทำอย่างไร",
+     "แจ้งเกิดได้ที่งานทะเบียนราษฎร์ครับ โดยทั่วไปใช้หนังสือรับรองการเกิดจากโรงพยาบาล บัตรประชาชนของพ่อแม่ "
+     "และทะเบียนบ้าน สอบถามรายละเอียดที่ช่องบริการครับ",
+     "How do I register a birth?",
+     "At the civil registration counter. Usually you need the hospital's birth certificate, the "
+     "parents' ID cards and the house registration book. Ask at the counter for details.",
+     "แจ้งเกิด,สูติบัตร,birth registration,birth certificate", False),
+    ("ทะเบียนราษฎร์", "แจ้งตายต้องทำอย่างไร",
+     "แจ้งการตายได้ที่งานทะเบียนราษฎร์ครับ โดยทั่วไปใช้หนังสือรับรองการตาย บัตรประชาชนของผู้ตายและผู้แจ้ง "
+     "และทะเบียนบ้าน สอบถามรายละเอียดที่ช่องบริการครับ",
+     "How do I register a death?",
+     "At the civil registration counter. Usually you need the death certificate, the ID cards "
+     "of the deceased and of the person reporting, and the house registration. Ask at the "
+     "counter for details.",
+     "แจ้งตาย,มรณบัตร,death registration,death certificate", False),
+    ("ทะเบียนราษฎร์", "เปลี่ยนชื่อต้องทำอย่างไร",
+     "ยื่นคำขอเปลี่ยนชื่อได้ที่งานทะเบียนครับ นำบัตรประชาชนและทะเบียนบ้านมาด้วย เจ้าหน้าที่จะแจ้งขั้นตอนต่อไป",
+     "How do I change my name?",
+     "Apply at the registration counter with your ID card and house registration. The staff "
+     "will explain the next steps.",
+     "เปลี่ยนชื่อ,เปลี่ยนนามสกุล,change name", False),
+    ("ทะเบียนราษฎร์", "จดทะเบียนสมรสได้ไหม",
+     "สอบถามการจดทะเบียนสมรสและเอกสารที่ต้องใช้ได้ที่ช่องบริการงานทะเบียนครับ",
+     "Can we register our marriage here?",
+     "Please ask the registration counter about marriage registration and the documents needed.",
+     "จดทะเบียนสมรส,แต่งงาน,marriage,marriage registration", False),
+    ("ขั้นตอน", "ให้คนอื่นมาทำแทนได้ไหม",
+     "บางบริการทำแทนได้โดยใช้หนังสือมอบอำนาจ พร้อมบัตรประชาชนของผู้มอบและผู้รับมอบครับ "
+     "บางบริการต้องมาด้วยตนเอง สอบถามที่ช่องบริการก่อนนะครับ",
+     "Can someone else do it for me?",
+     "Some services accept a power of attorney with the ID cards of both people. Others must be "
+     "done in person, so please check at the counter first.",
+     "มอบอำนาจ,ทำแทน,proxy,authorization,power of attorney", False),
+    ("ขั้นตอน", "ต้องถ่ายสำเนาเอกสารกี่ชุด",
+     "จำนวนสำเนาขึ้นกับบริการครับ ถามเจ้าหน้าที่ที่จุดประชาสัมพันธ์ก่อนรับคิวจะช่วยให้ไม่ต้องเสียเวลาครับ",
+     "How many copies of documents do I need?",
+     "It depends on the service. Ask the information counter before you take a queue ticket to save time.",
+     "สำเนา,ถ่ายเอกสาร,กี่ชุด,copies,photocopy", False),
+    ("บริการทั่วไป", "มีจุดถ่ายเอกสารไหม",
+     "สอบถามจุดถ่ายเอกสารที่ใกล้ที่สุดได้ที่จุดประชาสัมพันธ์ครับ",
+     "Is there a photocopier?",
+     "Please ask the information counter for the nearest photocopying point.",
+     "ถ่ายเอกสาร,สำเนา,photocopy,copy", False),
+    ("บริการทั่วไป", "ชำระเงินด้วยวิธีไหนได้บ้าง",
+     "สอบถามช่องทางการชำระค่าธรรมเนียมได้ที่ช่องบริการครับ",
+     "How can I pay the fee?",
+     "Please ask at the service counter which payment methods are accepted.",
+     "ชำระเงิน,จ่ายเงิน,ค่าธรรมเนียม,payment,pay", False),
+    ("บริการทั่วไป", "ร้องเรียนหรือแจ้งเรื่องได้ที่ไหน",
+     "แจ้งเรื่องร้องเรียนได้ที่ศูนย์บริการประชาชนหรือจุดประชาสัมพันธ์ครับ หรือโทรศูนย์บริการประชาชน 1111",
+     "Where can I make a complaint?",
+     "Please go to the public service centre or the information counter, or call the government "
+     "contact centre on 1111.",
+     "ร้องเรียน,แจ้งเรื่อง,1111,complaint,report", False),
+    ("บริการทั่วไป", "ติดตามเรื่องที่ยื่นไว้ได้อย่างไร",
+     "นำเลขที่หรือใบรับเรื่องไปสอบถามที่ช่องบริการที่ยื่นเรื่องไว้ครับ",
+     "How do I follow up on my application?",
+     "Bring your reference number or receipt to the counter where you applied.",
+     "ติดตาม,ตามเรื่อง,follow up,status", False),
+    ("สิ่งอำนวยความสะดวก", "ที่จอดรถอยู่ที่ไหน",
+     "ดูป้ายที่จอดรถสำหรับผู้มาติดต่อ หรือสอบถามเจ้าหน้าที่รักษาความปลอดภัยครับ",
+     "Where can I park?",
+     "Follow the visitor parking signs or ask the security guard.",
+     "ที่จอดรถ,จอดรถ,parking", False),
+    ("สิ่งอำนวยความสะดวก", "ผู้สูงอายุหรือผู้พิการมีช่องบริการพิเศษไหม",
+     "แจ้งเจ้าหน้าที่ประชาสัมพันธ์ได้ครับ หลายหน่วยงานมีช่องทางพิเศษหรือช่วยอำนวยความสะดวกให้ผู้สูงอายุ ผู้พิการ และหญิงตั้งครรภ์",
+     "Is there priority service for the elderly or disabled?",
+     "Please tell the information counter. Many offices have a priority channel or help for the "
+     "elderly, people with disabilities and pregnant women.",
+     "ผู้สูงอายุ,ผู้พิการ,คนท้อง,ช่องพิเศษ,priority,elderly,disabled,pregnant", False),
+    ("การแต่งกาย", "ต้องแต่งกายอย่างไรเมื่อมาติดต่อราชการ",
+     "แต่งกายสุภาพครับ ถ้ามาถ่ายรูปทำบัตร ควรถอดหมวกและแว่นกันแดดตอนถ่ายรูป",
+     "How should I dress when visiting a government office?",
+     "Please dress politely. If your photo is taken for a card, remove your hat and sunglasses for the photo.",
+     "แต่งกาย,การแต่งกาย,dress,dress code", False),
+]
